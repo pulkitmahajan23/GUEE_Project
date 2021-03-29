@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "611404845302",
+    "firebase_url": "https://guee-1e7ea-default-rtdb.firebaseio.com",
+    "project_id": "guee-1e7ea",
+    "storage_bucket": "guee-1e7ea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:611404845302:android:4fa80de58947a78a761cd7",
+        "android_client_info": {
+          "package_name": "com.example.guee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "611404845302-f53oaj8q7vlkr5mlqp01fatoubaqcv5u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpvWIHRqTr_0rkKL8kiPD1jZE1AICCFSI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "611404845302-f53oaj8q7vlkr5mlqp01fatoubaqcv5u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
