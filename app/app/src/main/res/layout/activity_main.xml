@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,14 +8,53 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/Current"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:id="@+id/text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:hint="Current Value"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="15dp"
         />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/voltage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Voltage : 230 V"
+        android:layout_below="@id/Current"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="15dp"
+        />
+
+    <TextView
+        android:id="@+id/Power"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Power"
+        android:layout_below="@id/voltage"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="15dp"
+        />
+
+    <TextView
+        android:id="@+id/Energy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Energy consumption"
+        android:layout_below="@id/Power"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="15dp"
+        />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Plug status"
+        android:layout_below="@id/Energy"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="15dp"
+        />
+
+</RelativeLayout>
