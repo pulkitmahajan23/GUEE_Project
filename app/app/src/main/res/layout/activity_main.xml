@@ -11,7 +11,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <TextView
+
+        <TextView
         android:id="@+id/Current"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,19 +20,19 @@
         android:layout_alignParentLeft="true"
         android:layout_marginTop="35dp"
         android:layout_marginLeft="15dp"
-        />
+        android:textColor="@color/black"/>
 
-    <TextView
+        <TextView
         android:id="@+id/voltage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Voltage : 230 V"
+        android:text="Voltage : 230 V"
         android:layout_below="@id/Current"
         android:layout_marginTop="35dp"
         android:layout_marginLeft="15dp"
-        />
+        android:textColor="@color/black"        />
 
-    <TextView
+        <TextView
         android:id="@+id/Power"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,9 +40,9 @@
         android:layout_below="@id/voltage"
         android:layout_marginTop="35dp"
         android:layout_marginLeft="15dp"
-        />
+        android:textColor="@color/black"    />
 
-    <TextView
+        <TextView
         android:id="@+id/Energy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,17 +50,30 @@
         android:layout_below="@id/Power"
         android:layout_marginTop="35dp"
         android:layout_marginLeft="15dp"
-        />
+        android:textColor="@color/black"
+            />
+
+        <TextView
+            android:id="@+id/Tariff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_below="@id/Energy"
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="15dp"
+            android:hint="Bill Amount"
+            />
+
 
     <Switch
         android:id="@+id/switch1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Plug status"
-        android:layout_below="@id/Energy"
+        android:layout_below="@id/Tariff"
         android:layout_marginTop="35dp"
         android:layout_marginLeft="15dp"
-        />
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <com.github.mikephil.charting.charts.LineChart
         android:layout_width="match_parent"

@@ -39,5 +39,9 @@ public class Project {
     //    return projectParamsList.get(projectParamsList.size()-1).getPower();
         return  projectParamsList.get(2).getPower();
     }
+
+    public double getLatestTariff(){
+        return projectParamsList.get(2).getTariff();
+    }
 }
 

@@ -69,6 +69,8 @@ public class FirebaseDatabaseRepository {
          double energy =0;
         try {
             energy = Double.parseDouble(dataSnapShot.child("Energy").getValue().toString());
+            if(energy<0)
+                energy=Math.abs(energy);
           //  Log.println(Log.ASSERT,"Get energy", String.valueOf(energy));
         } catch (Exception ignored) {
         }
@@ -98,6 +100,16 @@ public class FirebaseDatabaseRepository {
         return energy;
     }
 
+    private double getTariff(DataSnapshot dataSnapShot) {
+        double energy = 0;
+        try {
+            energy = Double.parseDouble(dataSnapShot.child("Tariff").getValue().toString());
+            if(energy<0)
+                energy=Math.abs(energy);
+        } catch (Exception ignored) {
+        }
+        return energy;
+    }
     private void setUpListener() {
         /*projectsChildEventListener = new ChildEventListener() {
 
@@ -157,13 +169,15 @@ public class FirebaseDatabaseRepository {
                     double energy = getEnergy(dataSnapShot);
                     double currentAc = getCurrentAc(dataSnapShot);
                     double power= getPower(dataSnapShot);
+                    double tariff= getTariff(dataSnapShot);
                    // Log.println(Log.ASSERT,"Inside on data change - Energy", String.valueOf(energy));
                     //Log.println(Log.ASSERT,"Inside on data change - current", String.valueOf(currentAc));
                     //Log.println(Log.ASSERT,"Inside on data change - power", String.valueOf(power));
-                    projectParamsList.add(new ProjectParams(energy,currentAc,power));
+                   // Log.println(Log.ASSERT,"Inside on data change - power", String.valueOf(tariff));
+                    projectParamsList.add(new ProjectParams(energy,currentAc,power,tariff));
                 }
                 if(projectParamsList.isEmpty()){
-                    projectParamsList.add(new ProjectParams(10,12,17));
+                    projectParamsList.add(new ProjectParams(10,12,17,500));
                 }
                 projectList.add(new Project(projectParamsList));
                 projectMutableLiveData.setValue(projectList);
