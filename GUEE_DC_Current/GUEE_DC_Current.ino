@@ -51,10 +51,11 @@ void setup()
 void loop() 
 {
     float acs712Currrent  = acs712.getCurrent();
-    Serial.print(acs712Currrent); Serial.println(F(" [mA]"));
+    Serial.print(acs712Currrent); 
+    Serial.println(F(" [mA]"));
 
     //}
-      if(Firebase.set(firebaseData, "/Current_DC",acs712Currrent))
+      if(Firebase.set(firebaseData, "/Current_DC",(acs712Currrent)))
      {
         Serial.println("Success");
      }
