@@ -122,7 +122,7 @@ float getVPP()
   int maxValue = 0;             
   int minValue = 1024;          
   uint32_t start_time = millis();
-  while((millis()-start_time) < 950) //read every 0.95 Sec
+  while((millis()-start_time) < 20) //read every 0.02s, frequency=50Hz
   {
      readValue = analogRead(Sensor_Pin);    
      if (readValue > maxValue) 
