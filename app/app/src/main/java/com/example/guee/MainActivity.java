@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -84,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
        final DatabaseReference current_ac = database.getReference("GUEE").child("Current_Ac");
 
 
-        current_ac.addValueEventListener(new ValueEventListener() {
+      /*  current_ac.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
@@ -99,8 +101,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("energy",""+energy);
                 DatabaseReference energySent=database.getReference("energy");
                 energyText.setText("Energy Consumed: "+energy+" kWh");
-               // setUpChart(energy);*/
-                firebaseDatabaseViewModel.refreshProjectList(swipeRefreshLayout);
+               // setUpChart(energy);
+              //  firebaseDatabaseViewModel.refreshProjectList(swipeRefreshLayout);
                 loadActivity();
             }
 
@@ -109,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 // Failed to read value
                 //   Log.w(TAG, "Failed to read value.", error.toException());
             }
-        });
+        });*/
 
         // FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference Toggle = database.getReference("GUEE").child("Status");
@@ -136,13 +138,13 @@ public class MainActivity extends AppCompatActivity {
 
         loadActivity();
 
-        swipeRefreshLayout.setOnRefreshListener(() -> {
+  /*      swipeRefreshLayout.setOnRefreshListener(() -> {
             firebaseDatabaseViewModel.refreshProjectList(swipeRefreshLayout);
             loadActivity();
         });
+*/
 
-/*
-       Timer timer= new Timer();
+     /*  Timer timer= new Timer();
         TimerTask timerTask=new TimerTask() {
             @Override
             public void run() {
@@ -157,7 +159,20 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        timer.schedule(timerTask,0l,1*1000*60);*/
+        timer.schedule(timerTask,0l,1*1000*20);*/
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 20 seconds
+                Log.println(Log.ASSERT,"Continuing task: ","Inside handler");
+                firebaseDatabaseViewModel.refreshProjectList(swipeRefreshLayout);
+                loadActivity();
+                handler.postDelayed(this, 10000);
+            }
+        }, 20000);
+
     }
 
     public void loadActivity(){
@@ -172,13 +187,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
     private void setValues()
     {
         currentAc.setText("Ac Current: "+thisProject.getLatestCurrent()+" A");
         power.setText("Power consumed: " +thisProject.getLatestPower() +" Watts");
         energyText.setText("Energy Consumed: "+thisProject.getLatestEnergy()+" Wh");
         tariff.setText("Tariff: "+thisProject.getLatestTariff()+" Rs");
-        setUpChart(thisProject.getProjectParamsList());
+       // if(thisProject.getLatestCurrent()>0)
+            setUpChart(thisProject.getProjectParamsList());
       //  Log.println(Log.ASSERT,"Project params list size", String.valueOf(thisProject.getProjectParamsList()));
     }
 
@@ -266,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
         double count = 1/(60*60);
         // count = hours
         float to = (float) (now + count);
-        Log.println(Log.ASSERT,"Graph values "+i,String.valueOf(projectParamsList.get(2).getEnergy()));
+       // Log.println(Log.ASSERT,"Graph values "+i,String.valueOf(projectParamsList.get(2).getEnergy()));
         // increment by 1 hour
        /* for (float x = now; x < to; x++) {
 
@@ -276,10 +293,12 @@ public class MainActivity extends AppCompatActivity {
 */
         for(int x=0;x<1;x++)
         {
-        energyGraphEntries.add(new Entry(i, (float) projectParamsList.get(2).getEnergy()));
+        energyGraphEntries.add(new Entry(i, (float) projectParamsList.get(projectParamsList.size()-1).getEnergy()));
         i++;
+            showChart(energyGraphEntries);
+            return;
         }
-        showChart(energyGraphEntries);
+        //showChart(energyGraphEntries);
 
        /*shouldChartExist(projectParamsList);
         createChart(energyGraphEntries, "Energy", colors[0], energyLineChart);

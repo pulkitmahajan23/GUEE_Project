@@ -73,6 +73,7 @@
         android:layout_below="@id/Tariff"
         android:layout_marginTop="35dp"
         android:layout_marginLeft="15dp"
+        android:checked="true"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <com.github.mikephil.charting.charts.LineChart
