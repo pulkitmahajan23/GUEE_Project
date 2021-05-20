@@ -10,7 +10,7 @@ const int ledChannel=0;
 const int resolution=8;
 
 const int Sensor_Pin = 34;
-unsigned int Sensitivity = 1850;   
+unsigned int Sensitivity = 66;   
 float Vpp = 0; // peak-peak voltage 
 float Vrms = 0; // rms voltage
 float Irms = 0; // rms current
@@ -21,12 +21,10 @@ float Wh =0 ;             // Energy in kWh
 int status1=0;
 unsigned long last_time =0;
 unsigned long current_time =0;
-unsigned long interval = 100;
-unsigned int calibration = 100;  // V2 slider calibrates this
 unsigned int pF = 95;           // Power Factor default 95
 float bill_amount = 0;   // 30 day cost as present energy usage incl approx PF
 unsigned int baseTariff=550.0;   //Rs 110 per KVA per month, assuming 5 KVA
-unsigned int energyTariff = 8.0; // Energy cost in INR per unit (kWh)
+unsigned int energyTariff = 5.5; // Energy cost in INR per unit (kWh)
 
 const int RELAY_PIN = 35;  
 int threshold_max=16;
@@ -50,8 +48,7 @@ void getACS712() {  // for AC
   
     Vpp = getVPP();
     Vrms = (Vpp/2.0) *0.707; 
-    Vrms = Vrms - (calibration / 10000.0);     // calibtrate to zero with slider
-    Irms = (Vrms * 1000)/Sensitivity ;
+    Irms = (Vrms * Sensitivity)*1000;
     if((Irms > -0.015) && (Irms < 0.008)){  // remove low end chatter
       Irms = 0.0;
     }
